@@ -1,0 +1,13 @@
+com/ProjetoWeb/ProjetoWeb/domain/model/Usuarios.class
+com/ProjetoWeb/ProjetoWeb/repository/CondominioRepository.class
+com/ProjetoWeb/ProjetoWeb/dto/UsuarioDTO.class
+com/ProjetoWeb/ProjetoWeb/ProjetoWebApplication.class
+com/ProjetoWeb/ProjetoWeb/domain/TipoDoUsuario.class
+com/ProjetoWeb/ProjetoWeb/service/UsuarioService.class
+com/ProjetoWeb/ProjetoWeb/domain/model/Condominio.class
+com/ProjetoWeb/ProjetoWeb/repository/UsuarioRepository.class
+com/ProjetoWeb/ProjetoWeb/exception/CondominioNotFoundException.class
+com/ProjetoWeb/ProjetoWeb/service/CondominioService.class
+com/ProjetoWeb/ProjetoWeb/dto/CondominioDTO.class
+com/ProjetoWeb/ProjetoWeb/controller/CondominioController.class
+com/ProjetoWeb/ProjetoWeb/controller/UsuariosController.class

@@ -1,0 +1,13 @@
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/ProjetoWebApplication.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/controller/CondominioController.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/controller/UsuariosController.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/domain/TipoDoUsuario.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/domain/model/Condominio.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/domain/model/Usuarios.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/dto/CondominioDTO.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/dto/UsuarioDTO.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/exception/CondominioNotFoundException.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/repository/CondominioRepository.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/repository/UsuarioRepository.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/service/CondominioService.java
+/home/eduardo/Desktop/Argus-API/src/main/java/com/ProjetoWeb/ProjetoWeb/service/UsuarioService.java
