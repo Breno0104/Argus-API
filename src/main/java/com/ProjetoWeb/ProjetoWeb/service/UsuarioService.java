@@ -17,74 +17,86 @@ import com.ProjetoWeb.ProjetoWeb.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-        @Autowired
-        private UsuarioRepository usuarioRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
-        @Autowired
-        private CondominioRepository condominioRepository;
-
-
-
-    public List<UsuarioDTO> getAllUsers() {
-            return usuarioRepository.findAll().stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList());
-    }
-
-        public Optional<UsuarioDTO> findUserById(Long id) {
-            return usuarioRepository.findById(id).map((this::convertToDTO));
-        }
-
-    public Optional<UsuarioDTO> findUserByCpf(String cpf) {
-        return usuarioRepository.findUsuarioByCpf(cpf)
-                .map(this::convertToDTO);
-    }
+	@Autowired
+	private CondominioRepository condominioRepository;
 
 
-    public Usuarios updateUser(Long id, Usuarios usuarios) throws Exception {
-            Usuarios existingUser = usuarioRepository.findById(id)
-                    .orElseThrow(() -> new Exception("Usuário não encontrado"));
+	public Usuarios createUser(Usuarios usuario) throws Exception {
+		if (usuarioRepository.findUsuarioByCpf(usuario.getCpf()).isPresent()) {
+			throw new Exception("CPF já cadastrado");
+		}
 
-            existingUser.setNome(usuarios.getNome());
-            existingUser.setCpf(usuarios.getCpf());
-            existingUser.setSenha(usuarios.getSenha());
-            existingUser.setTelefone(usuarios.getTelefone());
-            existingUser.setTipoDoUsuario(usuarios.getTipoDoUsuario());
-            existingUser.setBloco(usuarios.getBloco());
-            existingUser.setApartamento(usuarios.getApartamento());
+		if (usuario.getCondominio() != null && usuario.getCondominio().getNome() != null) {
+			Condominio condominio = condominioRepository.findByNome(usuario.getCondominio().getNome())
+					.orElseThrow(() -> new CondominioNotFoundException("Condomínio não encontrado"));
+			usuario.setCondominio(condominio);
+		}
 
+		return usuarioRepository.save(usuario);
+	}
+	public List<UsuarioDTO> getAllUsers() {
+		return usuarioRepository.findAll().stream()
+				.map(this::convertToDTO)
+				.collect(Collectors.toList());
+	}
 
-            if (usuarios.getCondominio() != null && usuarios.getCondominio().getNome() != null) {
-                Condominio condominio = condominioRepository.findByNome(usuarios.getCondominio().getNome())
-                        .orElseThrow(() -> new CondominioNotFoundException("Condomínio não encontrado"));
-                existingUser.setCondominio(condominio);
-            }
+	public Optional<UsuarioDTO> findUserById(Long id) {
+		return usuarioRepository.findById(id).map((this::convertToDTO));
+	}
 
-            return usuarioRepository.save(existingUser);
-        }
-
-
-        public UsuarioDTO deleteUser(Long id) throws Exception {
-            Usuarios usuarios = usuarioRepository.findById(id)
-                    .orElseThrow(() -> new Exception("Usuário não encontrado"));
-
-            usuarioRepository.delete(usuarios);
-
-            return convertToDTO(usuarios);
-        }
+	public Optional<UsuarioDTO> findUserByCpf(String cpf) {
+		return usuarioRepository.findUsuarioByCpf(cpf)
+				.map(this::convertToDTO);
+	}
 
 
-        // Método auxiliar para converter User em UserDTO
-        public UsuarioDTO convertToDTO(Usuarios usuarios) {
-            return new UsuarioDTO(
-                    usuarios.getId(),
-                    usuarios.getNome(),
-                    usuarios.getTelefone(),
-                    usuarios.getTipoDoUsuario().name(),
-                    usuarios.getBloco(),
-                    usuarios.getApartamento(),
-                    usuarios.getCondominio() != null ? usuarios.getCondominio().getNome() : null,
-                    usuarios.getCondominio() != null ? usuarios.getCondominio().getEndereco() : null
-            );
-        }
+	public Usuarios updateUser(Long id, Usuarios usuarios) throws Exception {
+		Usuarios existingUser = usuarioRepository.findById(id)
+				.orElseThrow(() -> new Exception("Usuário não encontrado"));
+
+		existingUser.setNome(usuarios.getNome());
+		existingUser.setCpf(usuarios.getCpf());
+		existingUser.setSenha(usuarios.getSenha());
+		existingUser.setTelefone(usuarios.getTelefone());
+		existingUser.setTipoDoUsuario(usuarios.getTipoDoUsuario());
+		existingUser.setBloco(usuarios.getBloco());
+		existingUser.setApartamento(usuarios.getApartamento());
+
+
+		if (usuarios.getCondominio() != null && usuarios.getCondominio().getNome() != null) {
+			Condominio condominio = condominioRepository.findByNome(usuarios.getCondominio().getNome())
+					.orElseThrow(() -> new CondominioNotFoundException("Condomínio não encontrado"));
+			existingUser.setCondominio(condominio);
+		}
+
+		return usuarioRepository.save(existingUser);
+	}
+
+
+	public UsuarioDTO deleteUser(Long id) throws Exception {
+		Usuarios usuarios = usuarioRepository.findById(id)
+				.orElseThrow(() -> new Exception("Usuário não encontrado"));
+
+		usuarioRepository.delete(usuarios);
+
+		return convertToDTO(usuarios);
+	}
+
+
+	// Método auxiliar para converter User em UserDTO
+	public UsuarioDTO convertToDTO(Usuarios usuarios) {
+		return new UsuarioDTO(
+				usuarios.getId(),
+				usuarios.getNome(),
+				usuarios.getTelefone(),
+				usuarios.getTipoDoUsuario().name(),
+				usuarios.getBloco(),
+				usuarios.getApartamento(),
+				usuarios.getCondominio() != null ? usuarios.getCondominio().getNome() : null,
+						usuarios.getCondominio() != null ? usuarios.getCondominio().getEndereco() : null
+				);
+	}
 }
