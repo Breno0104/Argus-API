@@ -44,10 +44,6 @@ public class ComunicadoService {
 
         Comunicados salvo = comunicadoRepository.save(comunicado);
         
-
-
-
-        
          return converterParaDTO(salvo);
     }
 
